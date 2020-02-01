@@ -7,7 +7,7 @@ words = my_file.readlines()
 
 #get a random word from list
 new_list = []
-read_ran_word = randint(3, 10)
+read_ran_word = randint(3, 6)
 ran_words = sample(words, read_ran_word)
 for i in range(len(ran_words)):
     new_list.append(ran_words[i])

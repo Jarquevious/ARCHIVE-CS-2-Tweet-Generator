@@ -1,20 +1,33 @@
-import random
-import sys
+# import random
+# import sys
 
-def rearrange(sentence):
-  split_words = sentence.split(" ")
-  new_sentence = []
+# def rearrange(sentence):
+#   split_words = sentence.split(" ")
+#   new_sentence = []
 
-  while len(split_words) > 0:
-    for _ in range(len(split_words)):
-      rand_index = random.randint(0, len(split_words) - 1)
-      new_sentence.append(split_words[rand_index])
-      split_words.remove(split_words[rand_index])
+#   while len(split_words) > 0:
+#     for _ in range(len(split_words)):
+#       rand_index = random.randint(0, len(split_words) - 1)
+#       new_sentence.append(split_words[rand_index])
+#       split_words.remove(split_words[rand_index])
   
-#   return (' '.join(new_sentence))
-  print(' '.join(new_sentence))
-  # print(new_sentence)
+# #   return (' '.join(new_sentence))
+#   print(' '.join(new_sentence))
+#   # print(new_sentence)
 
-if __name__ == "__main__":
-    sentence = " ".join(sys.argv[1:])
-    rearrange(sentence)
+# if __name__ == "__main__":
+#     sentence = " ".join(sys.argv[1:])
+#     rearrange(sentence)
+
+
+from random import randint
+import sys 
+
+def rearrange():
+  lines = ['brown', 'cow', 'how']
+
+  for _ in lines:
+    ran_index = randint(0, len(lines)-1)
+    print(lines[ran_index])
+
+rearrange()
