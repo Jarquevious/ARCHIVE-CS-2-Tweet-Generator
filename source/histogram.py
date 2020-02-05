@@ -1,4 +1,5 @@
 import string
+from time import time
 # A histogram() function which takes a source_text argument (can be either a filename 
 # or the contents of the file as a string, your choice) and return a histogram data structure
 # that stores each unique word along with the number of times the word appears in the source text.
@@ -28,12 +29,13 @@ def histogram(lines):
   for line in lines:
     words = line.rstrip('\n').split()
     for word in words:
+      word_count = word_histogram.get(word, 0) + 1
+      word_histogram[word] = word_count
       #TODO: add code to increase the count in the histogram for the given word
-      if word not in word_histogram:
-        word_histogram[word]=1
-      else:
-        word_histogram[word]+= 1
-
+      # if word not in word_histogram:
+      #   word_histogram[word]=1
+      # else:
+      #   word_histogram[word]+= 1
   return word_histogram
 
 def unique_words(word_histogram):
@@ -61,5 +63,7 @@ if __name__ == '__main__':
   print (frequency(hist))
 
 
-      
+  
+
+
 

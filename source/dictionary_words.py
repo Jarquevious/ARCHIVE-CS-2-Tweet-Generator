@@ -1,4 +1,5 @@
 from random import randint, sample
+from time_script import timescript
 #open and read the file
 my_file = open("/usr/share/dict/words", "r")
 words = my_file.readlines()

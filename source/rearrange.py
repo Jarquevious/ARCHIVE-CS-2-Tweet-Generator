@@ -23,11 +23,14 @@
 from random import randint
 import sys 
 
-def rearrange():
-  lines = ['brown', 'cow', 'how']
+def rearrange(lines):
+  #lines = ['brown', 'cow', 'how']
 
   for _ in lines:
     ran_index = randint(0, len(lines)-1)
     print(lines[ran_index])
 
-rearrange()
+
+if __name__ == "__main__":
+    sentence = " ".join(sys.argv[1:])
+    rearrange(sentence)
