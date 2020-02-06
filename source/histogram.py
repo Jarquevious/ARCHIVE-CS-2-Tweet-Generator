@@ -36,6 +36,7 @@ def histogram(lines):
       #   word_histogram[word]=1
       # else:
       #   word_histogram[word]+= 1
+  
   return word_histogram
 
 def unique_words(word_histogram):

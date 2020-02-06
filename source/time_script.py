@@ -12,22 +12,24 @@
 # from time import time, ctime
 # t = time()
 # print(ctime(t))
+
 import timeit
 
-def elapsed_time(code_to_test):
-    code_to_test = """ 
-a = range(100000)
-b = []
-for i in a:
-    b.append(i*2)
-    """
-
-    elapsed_time = timeit.timeit(code_to_test, number=100)/100
+def elapsed_time():
+#     code_to_test = """ 
+# a = range(100000)
+# b = []
+# for i in a:
+#     b.append(i*2)
+#     """
+    start_time = 
+    end_time = 
+    elapsed_time = timeit.timeit(number=100)/100
     print(elapsed_time)
     return elapsed_time
 
 
-elapsed_time('code_to_test')
+elapsed_time()
     
 
 # also_code_to_test = """

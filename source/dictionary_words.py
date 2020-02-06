@@ -1,5 +1,5 @@
 from random import randint, sample
-from time_script import timescript
+# from time_script import elapsed_time
 #open and read the file
 my_file = open("/usr/share/dict/words", "r")
 words = my_file.readlines()
@@ -22,4 +22,7 @@ for _ in range(len(new_list)):
 
 new_list = new_list.replace("\n", "")
 print(new_list)
+a = "/source/dictionary_words.py"
+
+# elapsed_time()
 
