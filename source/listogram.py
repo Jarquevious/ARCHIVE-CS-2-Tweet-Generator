@@ -7,7 +7,6 @@ class Listogram(list):
     def __init__(self, word_list=None):
         """Initialize this histogram as a new list and count given words."""
         super(Listogram, self).__init__()  # Initialize this as a new list
-        word_list = []
         # Add properties to track useful word counts for this histogram
         # Count of distinct word types in this histogram
         self.types = 0  
@@ -21,28 +20,42 @@ class Listogram(list):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
-        if word in word_list:
-            count += 1
+        for pair in self:
+            if pair[0] == word:
+                pair[1] += count 
+                return 
+        pair = [word, count]
+        self.append(pair)
+
+                
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
-        user_input = input("enter a word: ")
-        for word in word_list():
-            if user_input in word_list():
-                return Value
-            else:
-                return 0
+        # for word in word_list():
+        #     if user_input word_list():
+        #         return Value
+        #     else:
+        #         return 0
+        for pair in self:
+            if word == pair[0]:
+                return pair[1]
+        return 0
+
 
 
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
-        for word in histogram:
-            if word in histogram:
-                return 1
-            else:
-                return 0
+        # for word in histogram:
+        #     if word in histogram:
+        #         return 1
+        #     else:
+        #         return 0
+        for pair in self:
+            if word == pair[0]:
+                return True
+        return False
 
     def _index(self, target):
         """Return the index of entry containing given target word if found in
@@ -82,4 +95,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    fish_text = 'one fish two fish red fish blue fish'
+    apple = Listogram(fish_text.split())
+    print(apple)
+    print(apple.frequency("red"))
+
