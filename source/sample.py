@@ -12,23 +12,9 @@ def sample_by_frequency(histogram):
         if fence >= dart:
             return word
 
-# def sample_by_frequency(histogram):
-#   # TODO: select a word based on frequency  
-#   cum_num = 0 
-#   # print(cum_num)
-#   print(histogram)
-#   sum_values = sum(histogram.values())
-#   random_num = random.randint(0, sum_values - 1)
   
-#   for k, v in word_counts.items():
-#     # print("k:",k)
-#     cum_num += v
-#     if  cum_num > random_num:
-#       return k
-#       print(k)
-#     else:
-#       continue  
-#     return k
+
+
 '''histogram= {}
 
 for i in range(10000):

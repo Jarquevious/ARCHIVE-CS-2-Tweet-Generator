@@ -31,11 +31,7 @@ def histogram(lines):
     for word in words:
       word_count = word_histogram.get(word, 0) + 1
       word_histogram[word] = word_count
-      #TODO: add code to increase the count in the histogram for the given word
-      # if word not in word_histogram:
-      #   word_histogram[word]=1
-      # else:
-      #   word_histogram[word]+= 1
+      
   
   return word_histogram
 
