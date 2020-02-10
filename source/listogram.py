@@ -9,7 +9,7 @@ class Listogram(list):
         super(Listogram, self).__init__()  # Initialize this as a new list
         # Add properties to track useful word counts for this histogram
         # Count of distinct word types in this histogram
-        self.types = 0  
+        self.types = 0
         # Total count of all word tokens in this histogram
         self.tokens = 0  
         # Count words in given list, if any
@@ -20,23 +20,25 @@ class Listogram(list):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+
         for pair in self:
             if pair[0] == word:
                 pair[1] += count 
+                self.tokens += count
+                self.types = self.__type__()
                 return 
+        self.tokens += count        
         pair = [word, count]
         self.append(pair)
+        self.types = self.__type__()
 
-                
+#use __name__() when its protected meaning we dont want others to access it.
+    def __type__(self):
+        return len(self)       
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
-        # for word in word_list():
-        #     if user_input word_list():
-        #         return Value
-        #     else:
-        #         return 0
         for pair in self:
             if word == pair[0]:
                 return pair[1]
@@ -47,21 +49,19 @@ class Listogram(list):
     def __contains__(self, word):
         """Return boolean indicating if given word is in this histogram."""
         # TODO: Check if word is in this histogram
-        # for word in histogram:
-        #     if word in histogram:
-        #         return 1
-        #     else:
-        #         return 0
         for pair in self:
             if word == pair[0]:
                 return True
         return False
 
     def _index(self, target):
-        """Return the index of entry containing given target word if found in
+        """Return the index of entry(key,value inside hist) containing given target word if found in
         this histogram, or None if target word is not found."""
         # TODO: Implement linear search to find index of entry with target word
-
+        for i, pair in enumerate(self):
+            if target == pair[0]:
+                return i
+        return None 
 
 def print_histogram(word_list):
     print('word list: {}'.format(word_list))
@@ -95,9 +95,9 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    fish_text = 'one fish two fish red fish blue fish'
-    apple = Listogram(fish_text.split())
-    print(apple)
-    print(apple.frequency("red"))
+    main()
+    # fish_text = 'one fish two fish red fish blue fish'
+    # apple = Listogram(fish_text.split())
+    # print(apple)
+    # print(apple.frequency("red"))
 
