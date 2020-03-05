@@ -1,27 +1,60 @@
-import random
-# text = 'one fish two fish red fish blue fish'
-# word_counts = {'one': 1, 'fish': 4, 'two': 1,
-#                'red': 1, 'blue': 1}
-            
-def sample_by_frequency(histogram):
-    tokens = sum([count for word, count in histogram.items()])
-    dart = random.randint(1, tokens)
+from random import randint
+
+def histogram(lines):
+    histogram = {}
+    for line in lines:
+        words = line.rstrip('\n').split()
+        for word in words:
+            if word in histogram:
+                histogram[word] += 1
+            else:
+                histogram[word] = 1
+
+    return histogram
+
+def words_list(lines):
+    wordsList = []
+    for line in lines:
+        words = line.rstrip('\n').split()
+        for word in words:
+            wordsList.append(word)
+
+    return wordsList
+
+
+def sample(histogram):
+    tokens = 0
+    for k,v in histogram.items():
+        tokens += v
+
+    dart = randint(1, tokens)
+
     fence = 0
-    for word, count in histogram.items():
+
+    for word,count in histogram.items():
         fence += count
         if fence >= dart:
             return word
 
-  
+def words_list():
+    filename = 'adamsmith.txt'
+    file = open(filename, 'r')
+    lines = file.readlines()
 
+    words_list = []
 
-'''histogram= {}
+    for line in lines:
+        words = line.rstrip('\n').split()
+        for word in words:
+            words_list.append(word)
+    
+    
+    return words_list
 
-for i in range(10000):
-  word = sample_by_frequency(histogram)
-  if word in histogram:
-    histogram[word] += 1
-  else:
-    histogram[word] = 1
-  
-print(histogram)'''
+if __name__ == "__main__":
+    file = open('adamsmith.txt', 'r')
+    lines = file.readlines()
+
+    histogram_result = histogram(lines)
+    print(histogram_result)
+    print(sample(histogram_result))

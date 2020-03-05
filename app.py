@@ -1,11 +1,22 @@
-from flask import Flask
+from flask import Flask, render_template
 from histogram import histogram
-from sample import sample_by_frequency
+from sample import sample, words_list
+from markov import MarkovChain
+
 
 app = Flask(__name__)
 
-
 @app.route('/')
+def markov():
+    word_list = words_list()
+    markov_chain = MarkovChain(word_list)
+    sentence = markov_chain.walk(10)
+
+    return render_template('index.html', tweet=sentence)
+ 
+
+
+@app.route('/histogram')
 def generate_words():
     #build a histogram
     filename = open("./adamsmith.txt", "r")
@@ -16,10 +27,12 @@ def generate_words():
     sentence = ""
     num_words = 10
     for i in range(num_words):
-        word = sample_by_frequency(my_histogram)
+        word = sample(my_histogram)
         sentence += " " + word
 
-    return sentence
+    return render_template('index.html', tweet=sentence)
+
+
 
 if __name__ == '__main__':
     app.run()
