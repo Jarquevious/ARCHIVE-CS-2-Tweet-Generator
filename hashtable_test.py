@@ -87,6 +87,7 @@ class HashTableTest(unittest.TestCase):
         assert ht.get('I') == 1
         assert ht.get('V') == 5
         assert ht.get('X') == 10
+        print(ht.get('X'))
         assert ht.length() == 3  # Check length is not overcounting
 
     def test_delete(self):

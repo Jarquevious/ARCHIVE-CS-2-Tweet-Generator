@@ -40,11 +40,11 @@ class HashTable(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Collect all values in each bucket
-        all_val = []
+        all_values = []
         for bucket in self.buckets:
             for key, value in bucket.items():
-                all_val.append(value)
-            return all_val
+                all_values.append(value)
+        return all_values
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
@@ -97,10 +97,12 @@ class HashTable(object):
         index = self._bucket_index(key)
         try:
             item = self.buckets[index].find(lambda item: item[0] == key)
-            self.buckets[index].replace((key, item[1]), (key, value))
+            self.buckets[index].delete(item)
+            self.buckets[index].append((key, value))
         except:
             self.buckets[index].append((key, value))
             self.size += 1
+            
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
         TODO: Running time: O(???) Why and under what conditions?"""
@@ -150,4 +152,17 @@ def test_hash_table():
 
 
 if __name__ == '__main__':
-    test_hash_table()
+    #test_hash_table()
+    ht = HashTable()
+    ht.set('I', 1)
+    ht.set('V', 4)
+    ht.set('X', 9)
+    ht.length()
+    ht.set('V', 5)  # Update value
+    ht.set('X', 10)  # Update value
+    print(ht.get('X'))
+    #ht.get('I')
+    #ht.get('V')
+    #ht.get('X')
+    #print(ht.get('X'))
+    #ht.length() # Check length is not overcounting
