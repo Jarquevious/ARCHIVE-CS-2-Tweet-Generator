@@ -1,6 +1,7 @@
 from flask import Flask
 from histogram import histogram
 from sample import sample_by_frequency
+
 app = Flask(__name__)
 
 
