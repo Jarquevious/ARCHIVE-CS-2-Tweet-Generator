@@ -17,9 +17,12 @@ class LinkedList(object):
 
     def __init__(self, items=None):
         """Initialize this linked list and append the given items, if any."""
-        self.head = None  # First node
-        self.tail = None  # Last node
-        # Append given items
+        # First node
+        self.head = None  
+        # Last node
+        self.tail = None  
+        self.size = 0
+        # Append items
         if items is not None:
             for item in items:
                 self.append(item)
@@ -53,18 +56,25 @@ class LinkedList(object):
         return self.head is None
 
     def length(self):
+        # temp = self.head # Initialise temp           
+        # count = 0 # Initialise count
+        #Loop while end of linked list is not reached
+        # while (temp):
+        #     count += 1
+        #     temp = temp.next
+        #     return count
+        count = 0
+        node = self.head
+
+        while node is not None:
+            count += 1
+            node = node.next
+        return count
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
         # This function counts number of nodes in a list
-        def getCount(self):
-            temp = self.head # Initialise temp           
-            count = 0 # Initialise count
-            #Loop while end of linked list is not reached
-            while (temp):
-                count += 1
-                temp = temp.next
-            return count
+        
             
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -113,61 +123,71 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
-        
-        #set varaibles to keep track of previous and current node
-        previous = None
-        current = self.head
-        # Loop through LinkedList
-        while current is not None:
-         # If item is found   
-            if current.data == item:
-        # Finding items that is not the head
-                if previous is not None:
-                    previous.next = current.next
-                    if current.next is None:
-                        self.tail = previous 
-
-                else:
-                    self.head = self.head.next
-                    if self.length() == 0:
-                        self.tail = None 
-                        raise ValueError('Item not found: {}'.format(item))
-
-
-                return True
-
-            previous = current
-            current = current.next
-        return False
-        if found == False:
+        if self.is_empty():
             raise ValueError('Item not found: {}'.format(item))
-                    
-def test_linked_list():
-    ll = LinkedList()
-    print('list: {}'.format(ll))
+            return
+        currentNode = self.head
+        if currentNode.data == item: #if head has the item
+            self.head = currentNode.next #if head has next... assign next as new head
+            if currentNode.next == None: #head is the last item... set self.tail to none
+                self.tail = None
+            return
+        prev = None
+        while currentNode != None: #loop until we reach tail
+            print("Current node =", currentNode)
+            if currentNode.data == item: #if node's data is the item... found!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                if currentNode.next == None: #if currentNode is the tail because it has no next...
+                    self.tail = prev #prev node will now be the new tail
+                prev.next = currentNode.next #DELETE currentNode by removing prev's next (reference) to currentNode's next
+                return
+            # TODO: Update previous node to skip around node with matching data
+            prev = currentNode #if currentNode's data is not item, 
+            currentNode = currentNode.next #keep going til it reach the tail
+            print("Current.next = ", currentNode)
+        # TODO: Otherwise raise error to tell user that delete has failed
+        raise ValueError('Item not found: {}'.format(item))
+        # if self.length() == 0:
+        #     raise ValueError('Item not found: {}'.format(item))
 
-    print('\nTesting append:')
-    for item in ['A', 'B', 'C']:
-        print('append({!r})'.format(item))
-        ll.append(item)
-        print('list: {}'.format(ll))
+        # #see if node that we want deleted is the head
+        # if self.head.data == item:
+        #     self.head = self.head.next
+        #     self.size -= 1
+        #     if self.length() == 0:
+        #         self.tail = None
+        #     return
+        # #see if node that we want deleted is the tail
+        # if self.tail.data == item:
+        #     temp = self.tail.prev
+        #     temp.next = None
+        #     self.tail = temp
+        #     self.size -= 1
+        #     if self.length() == 0:
+        #         self.head = None
+        #     return
 
-    print('head: {}'.format(ll.head))
-    print('tail: {}'.format(ll.tail))
-    print('length: {}'.format(ll.length()))
+        # prev_node = self.head
+        # curr_node = prev_node.next
 
-    # Enable this after implementing delete method
-    delete_implemented = True
-    if delete_implemented:
-        print('\nTesting delete:')
-        for item in ['B', 'C', 'A']:
-            print('delete({!r})'.format(item))
-            ll.delete(item)
-            print('list: {}'.format(ll))
+        # found = False
+        # #while node is not found look at the next node
+        # while curr_node is not None:
+        #     if curr_node.data == item:
+        #         #node is found, route around node
+        #         prev_node.next = curr_node.next
+        #         temp = curr_node.next
+        #         temp.prev = prev_node
+        #         found = True
+        #         self.size -= 1
+        #     prev_node = curr_node
+        #     curr_node = curr_node.next
+        #     if found == True:
+        #         return
 
-        print('head: {}'.format(ll.head))
-        print('tail: {}'.format(ll.tail))
-        print('length: {}'.format(ll.length()))
+        # #if node is not found, raise error
+        # if found == False:
+        #     raise ValueError('Item not found: {}'.format(item))
+
 
 
 if __name__ == '__main__':
