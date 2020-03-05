@@ -76,6 +76,7 @@ class LinkedList(object):
             self.head = new_node
         else:
             self.tail.next = new_node
+        self.tail = new_node
             
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -95,6 +96,14 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+        current = self.head
+
+        while current != None:
+            if quality(current.data) == True:
+                return current.data
+            
+            current = current.next
+        return None 
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -104,8 +113,35 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
+        
+        #set varaibles to keep track of previous and current node
+        previous = None
+        current = self.head
+        # Loop through LinkedList
+        while current is not None:
+         # If item is found   
+            if current.data == item:
+        # Finding items that is not the head
+                if previous is not None:
+                    previous.next = current.next
+                    if current.next is None:
+                        self.tail = previous 
+
+                else:
+                    self.head = self.head.next
+                    if self.length() == 0:
+                        self.tail = None 
+                        raise ValueError('Item not found: {}'.format(item))
 
 
+                return True
+
+            previous = current
+            current = current.next
+        return False
+        if found == False:
+            raise ValueError('Item not found: {}'.format(item))
+                    
 def test_linked_list():
     ll = LinkedList()
     print('list: {}'.format(ll))
@@ -121,7 +157,7 @@ def test_linked_list():
     print('length: {}'.format(ll.length()))
 
     # Enable this after implementing delete method
-    delete_implemented = False
+    delete_implemented = True
     if delete_implemented:
         print('\nTesting delete:')
         for item in ['B', 'C', 'A']:
